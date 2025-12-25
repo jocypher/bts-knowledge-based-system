@@ -2,7 +2,7 @@ const Database = require("better-sqlite3")
 const path = require("path")
 
 
-const dbPath = path.join(process.cwd(), "data","bts_database.db")
+const dbPath = process.env.DB_PATH || path.join(process.cwd(), "data","bts_database.db")
 const db = Database(dbPath,{
     verbose: console.log
 })
