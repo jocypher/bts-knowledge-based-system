@@ -1,0 +1,20 @@
+{
+  "name": "bts_knowledge_based_appl",
+  "version": "1.0.0",
+  "description": "building the backend for the bts application knowledge based system to keep all the records of the bts teams",
+  "main": "dist/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --env-file=.env dist/server.js"
+  },
+  "author": "jocypher",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^12.5.0",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "nodemon": "^3.1.11"
+  }
+}
