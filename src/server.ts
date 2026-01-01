@@ -1,3 +1,5 @@
+import "dotenv/config";
+import "reflect-metadata";
 import express from "express";
 import articles from "./routes/articles";
 import logger from "./middlewares/loggers/reqLog";
