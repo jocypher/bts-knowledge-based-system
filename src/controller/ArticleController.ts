@@ -136,7 +136,7 @@ const recentlyAddedArticles = async(req:any, res:any)=>{
     return res.status(200).json(recentlyAddedArticles)
 }
 
-// filter 
+// filter articles
 const filterArticles = async(req:any, res:any)=>{
     const filter = req.query.q;
     const articleRepo = AppDataSource.getRepository(Article)
