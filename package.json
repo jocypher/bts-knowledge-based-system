@@ -6,15 +6,23 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --env-file=.env dist/server.js",
-    "build":"tsc"
+    "build": "tsc"
   },
   "author": "jocypher",
   "license": "ISC",
   "dependencies": {
     "better-sqlite3": "^12.5.0",
-    "express": "^5.2.1"
+    "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
+    "express": "^5.2.1",
+    "pg": "^8.16.3",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.28",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
     "@types/node": "^25.0.3",
     "nodemon": "^3.1.11"
   }
