@@ -8,16 +8,16 @@ import { Category } from "../models/Category"
 const AppDataSource = new DataSource(
     {
         type: "postgres",
-        host: "localhost", 
-        port: 5050,
-        username:"postgres",
-        password: "asdfghjkl", 
-        synchronize: true,
+        url: process.env.DATABASE_URL, 
+        synchronize: process.env.NODE_ENV !== "production",
         logging: false,
-        database: "bts_db",
-        entities: [Article, User, Category]
+        entities: [Article, User, Category],
+        ssl:{
+            rejectUnauthorized:false
+        }
     }
 )
+
 
 
 export default AppDataSource
