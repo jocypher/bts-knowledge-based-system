@@ -31,7 +31,7 @@ AppDataSource.initialize().then(()=>{
 
   app.use(errorLogs)
 
- app.listen("0.0.0.0", () => {
+ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
 }).catch((err)=>{

@@ -23,7 +23,7 @@ AppDataSource_1.default.initialize().then(() => {
     console.log("Data source has been initialized");
     app.use("/article", articles_1.default);
     app.use(errorLogs_1.default);
-    app.listen("0.0.0.0", () => {
+    app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
     });
 }).catch((err) => {
