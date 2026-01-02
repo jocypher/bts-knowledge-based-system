@@ -1,3 +1,4 @@
+import { DateUtils } from "typeorm/util/DateUtils.js"
 import AppDataSource from "../datasource/AppDataSource"
 import { Article } from "../models/Article"
 import { Category } from "../models/Category"
@@ -7,7 +8,7 @@ import { User } from "../models/User"
 
 
 
-// now that the db has been initialized or created , 
+// now that the db has been initialized.
 // we need to get the routes setup for each of the operations
 // // create - new article with details
 // //  update - update the current articles
@@ -93,7 +94,7 @@ const getArticleById = async(req:any, res:any)=>{
     const id = Number(req.params.id)
 
 
-    if(!id) return res.status(400)
+    if(!id) return res.status(400).json({message:"Article id not found"})
     
     const article = await articleRepo.findOne({
         where:{
@@ -122,6 +123,84 @@ const deleteArticleById = async(req:any, res:any)=>{
     return res.status(200).send("Article deleted successful")
 }
 
+
+// update Articles
+const updateAddedArticle = async(req:any, res:any)=>{
+    const id = Number(req.params.id)
+    const {title , category_name, content, author_name, verification} = req.body;
+
+    if(isNaN(id)) return res.status(400).json({message: "Invalid article id"})
+    
+    const articleRepo = AppDataSource.getRepository(Article)
+    const userRepo = AppDataSource.getRepository(User)
+    const categoryRepo = AppDataSource.getRepository(Category)
+
+    try{
+
+    const article = await articleRepo.findOne({
+        where:{
+            id: id
+        },
+        relations: ["author", "category"]
+    })
+    
+    if(!title && !content && !category_name && !author_name && !verification) return res.status(400).json({message: "No fields required to update"})
+    
+    if(title) article!.title = title
+    if(content) article!.content = content
+    if(verification) article!.verification = verification
+    article!.updatedAt = new Date()
+
+    if(author_name) {
+        let user = await userRepo.findOne({
+            where:{
+                authorName: author_name
+            }
+        })
+    if(!user){
+         user = await userRepo.create({
+            authorName: author_name  
+        })
+        await userRepo.save(user)
+    }
+    article!.author = user  
+    }
+
+    if(category_name){
+        let category = await categoryRepo.findOne({
+            where:{
+                categoryName:category_name
+            }
+        })
+    if(!category){
+        category = await categoryRepo.create({
+            categoryName:category_name
+        })
+        await categoryRepo.save(category)
+    }
+        article!.category = category
+    }
+
+
+//Save the updated article
+     await articleRepo.save(article!)
+
+    // Fetch the complete article with relations
+    const completeArticle = await articleRepo.findOne({
+      where: { id },
+      relations: ["author", "category"]
+    })
+
+    return res.status(200).send(completeArticle)
+}catch(err:any ){
+    console.error("Update article error:", err)
+    return res.status(500).json({
+      message: "Failed to update article",
+      error: err.message
+    })
+}
+    
+}
 
 // most recentlyAddedArticles
 const recentlyAddedArticles = async(req:any, res:any)=>{
@@ -162,4 +241,4 @@ const filterArticles = async(req:any, res:any)=>{
 
 
 
-export default {createArticle,getAllArticles, getArticleById, deleteArticleById, recentlyAddedArticles, filterArticles}
+export default {createArticle,getAllArticles, getArticleById, deleteArticleById, recentlyAddedArticles, filterArticles,updateAddedArticle}

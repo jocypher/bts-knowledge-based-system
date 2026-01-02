@@ -16,6 +16,15 @@ routes.post("/add", ArticleController.createArticle)
 routes.get("/", ArticleController.getAllArticles)
 
 
+// get recently added articles 
+routes.get("/recent", ArticleController.recentlyAddedArticles)
+
+routes.get("/filter",ArticleController.filterArticles )
+
+// update article
+routes.put("/:id", ArticleController.updateAddedArticle)
+
+
 
 // return a specific article
 routes.get("/:id", ArticleController.getArticleById)
@@ -25,10 +34,7 @@ routes.get("/:id", ArticleController.getArticleById)
 routes.delete("/:id", ArticleController.deleteArticleById)
 
 
-// get recently added articles 
-routes.get("/recent", ArticleController.recentlyAddedArticles)
 
-routes.get("/filter",ArticleController.filterArticles )
 
 // // returning articles by id
 // routes.get("/:id", (req:any, res:any)=>{

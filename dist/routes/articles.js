@@ -11,13 +11,15 @@ console.log("Articles router loaded");
 routes.post("/add", ArticleController_1.default.createArticle);
 // returning all articles created
 routes.get("/", ArticleController_1.default.getAllArticles);
+// get recently added articles 
+routes.get("/recent", ArticleController_1.default.recentlyAddedArticles);
+routes.get("/filter", ArticleController_1.default.filterArticles);
+// update article
+routes.put("/:id", ArticleController_1.default.updateAddedArticle);
 // return a specific article
 routes.get("/:id", ArticleController_1.default.getArticleById);
 // delete a specific article
 routes.delete("/:id", ArticleController_1.default.deleteArticleById);
-// get recently added articles 
-routes.get("/recent", ArticleController_1.default.recentlyAddedArticles);
-routes.get("/filter", ArticleController_1.default.filterArticles);
 // // returning articles by id
 // routes.get("/:id", (req:any, res:any)=>{
 //     const id = Number(req.params.id)
