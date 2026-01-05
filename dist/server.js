@@ -11,6 +11,8 @@ const reqLog_1 = __importDefault(require("./middlewares/loggers/reqLog"));
 const errorLogs_1 = __importDefault(require("./middlewares/loggers/errorLogs"));
 const AppDataSource_1 = __importDefault(require("./datasource/AppDataSource"));
 const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 4000;
 app.use((0, cors_1.default)({
