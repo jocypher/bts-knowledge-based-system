@@ -6,6 +6,8 @@ import logger from "./middlewares/loggers/reqLog";
 import errorLogs from "./middlewares/loggers/errorLogs";
 import AppDataSource from "./datasource/AppDataSource";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
 
 
