@@ -9,7 +9,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const AppDataSource = new DataSource({
     type: "postgres",
     url: process.env.DATABASE_URL,
-    synchronize: false,
+    synchronize: true,
     
     extra: {
         max: 5,
